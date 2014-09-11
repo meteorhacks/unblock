@@ -1,3 +1,5 @@
+[![](https://api.travis-ci.org/meteorhacks/unblock.svg)](https://travis-ci.org/meteorhacks/unblock)
+
 # Use this.unblock inside Meteor Publications
 
 This is a project to provide `this.unblock` functionality to publications.
