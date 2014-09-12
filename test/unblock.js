@@ -100,3 +100,27 @@ Tinytest.addAsync('cleanup - unsub after completing the sub', function(test, don
     handle.stop();
   }});
 });
+
+Tinytest.addAsync('cleanup - unsub and onStop before the big message', function(test, done) {
+  var id1 = Random.id();
+  var id2 = Random.id();
+  var conn = DDP.connect(process.env.ROOT_URL);
+  var subProcessing = [];
+
+  Meteor.publish(id1, function() {
+    this.unblock();
+    var compeletedSleep = false;
+    this.onStop(function() {
+      test.equal(compeletedSleep, false);
+      done();
+      conn.close();
+    });
+    Meteor._sleepForMs(500);
+    compeletedSleep = true;
+  });
+
+  var handle = conn.subscribe(id1);
+  setTimeout(function() {
+    handle.stop();
+  }, 200);
+});
