@@ -1,6 +1,6 @@
 Package.describe({
   summary: "use this.unblock inside publications",
-  version: "1.0.0",
+  version: "1.0.1",
   git: "https://github.com/meteorhacks/unblock.git",
   name: "meteorhacks:unblock"
 });
