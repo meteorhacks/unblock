@@ -57,5 +57,46 @@ Tinytest.addAsync('functionality check - no waiting with unblock', function(test
 
   conn.subscribe(id1);
   conn.subscribe(id2);
+});
 
+Tinytest.addAsync('cleanup - unsub before completing the sub', function(test, done) {
+  var id1 = Random.id();
+  var id2 = Random.id();
+  var conn = DDP.connect(process.env.ROOT_URL);
+  var subProcessing = [];
+
+  Meteor.publish(id1, function() {
+    this.ready();
+    this.unblock();
+    Meteor._sleepForMs(500);
+    this.onStop(function() {
+      done();
+      conn.close();
+    });
+  });
+
+  var handle = conn.subscribe(id1, {onReady: function() {
+    handle.stop();
+  }});
+});
+
+Tinytest.addAsync('cleanup - unsub after completing the sub', function(test, done) {
+  var id1 = Random.id();
+  var id2 = Random.id();
+  var conn = DDP.connect(process.env.ROOT_URL);
+  var subProcessing = [];
+
+  Meteor.publish(id1, function() {
+    this.unblock();
+    Meteor._sleepForMs(500);
+    this.onStop(function() {
+      done();
+      conn.close();
+    });
+    this.ready();
+  });
+
+  var handle = conn.subscribe(id1, {onReady: function() {
+    handle.stop();
+  }});
 });
