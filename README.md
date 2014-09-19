@@ -28,6 +28,9 @@ So, other messages can start processing without waiting for the above method.
 Install following package into your Meteor app.
 ```
 meteor add meteorhacks:unblock
+
+// for older Meteor versions
+mrt add unblock
 ```
 
 Use it inside your publications, if that takes too much time or you don't need subscriptions from other publications to wait on this.
