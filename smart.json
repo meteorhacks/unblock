@@ -1,0 +1,11 @@
+{
+  "name": "unblock",
+  "description": "a way to use this.unblock inside publications",
+  "homepage": "https://github.com/meteorhacks/unblock",
+  "author": "MeteorHacks <hello@meteorhacks.com>",
+  "version": "1.1.0",
+  "git": "https://github.com/meteorhacks/unblock.git",
+  "packages": {
+    "meteorx": {}
+  }
+}
