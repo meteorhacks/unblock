@@ -12,6 +12,7 @@ Package.on_use(function (api, where) {
 Package.on_test(function(api) {
   configurePackages(api);
 
+  api.use(['random', 'ddp'], 'server');
   api.use('tinytest');
   api.add_files('test/unblock.js', 'server');
 });
